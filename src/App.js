@@ -1,11 +1,17 @@
 import React, {useRef, useEffect, useState} from 'react';
-import Player from './Player';
-import Analyser from './Player/AnalyserThree';
+// import Player from './Player';
+// import Analyser from './Analyser';
+import Analyser from './AnalyserExperimental';
+// import Analyser from './Player2/AnotherTry2';
+import Bar from './Bar';
+// import Analyser from './Player/Analyser';
+import Audio from './Audio';
 import GraveyardShift from './assets/GraveyardShift';
 import './App.css';
 
 function App() {
   var [entered, setEntered] = useState(false);
+  var [loaded, setLoaded] = useState(false);
 
   function handleClick() {
     setEntered(true);
@@ -17,23 +23,17 @@ function App() {
 
   return (
     <div className="App">
-      {entered ? 
+      {/* {entered ? 
         <div>
           <Player/>
           <Analyser/>
         </div>
         :
         <div className="enter" onClick={() => handleClick()}><GraveyardShift/></div>
-      }
-      <audio id="audio"
-        controls
-        onCanPlay={() => console.log('Can Play')}
-        onCanPlayThrough={() => console.log('Can Play Through')}
-        // muted="1"
-        
-        crossOrigin="anonymous"
-        src={"https://api.soundcloud.com/tracks/468716610/stream?client_id=1zsDz22qtfrlBg2rdkko9EahD3GiJ996"}
-      />
+      } */}
+      {loaded && <Analyser/>}
+      {loaded && <Bar/>}
+      <Audio setLoaded={setLoaded} />
     </div>
   );
 }
