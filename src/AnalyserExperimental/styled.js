@@ -10,14 +10,14 @@ export const Visualizer = styled.canvas`
     left: 0;
     // top: calc(50vh - 175px);
     // left: calc(50vw - 400px);
-    cursor: pointer;
+    cursor: grab;
     z-index: -1;
 `;
 
 
 export const Overlay = styled.div`
   position: absolute;
-  z-index: 1;
+  z-index: 999;
   top: 0;
   left: 0;
   width: 100%;

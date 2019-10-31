@@ -1,7 +1,9 @@
 import React, {useEffect, useState}  from 'react';
-import { ControlPanel, Overlay, Visualizer } from './styled';
+import { Overlay, Visualizer } from './styled';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import CameraControls from '../CameraControls';
+import { Camera } from 'three';
 
 const AnalyserThree = () => {
   window.AudioContext = window.AudioContext || window.webkitAudioContext || window.mozAudioContext;
@@ -11,6 +13,7 @@ const AnalyserThree = () => {
   let ground, geometry, length, time = 0;
   let frequency = true;
   let binCount = 256;
+  var mediaElement;
 
   useEffect(() => {
     var startButton = document.getElementById( 'startButton' );
@@ -26,21 +29,21 @@ const AnalyserThree = () => {
       renderer.setClearColor( 0x000000 );
       renderer.setPixelRatio( window.devicePixelRatio );
       scene = new THREE.Scene();
-      camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 2000 );
+      camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 2500 );
       // 
-      camera.position.set( 0, 0, 1000 );
+      camera.position.set( 0, 1200, 0 );
       camera.lookAt( 0, 0, 0 );
 
       controls = new OrbitControls( camera, renderer.domElement );
       controls.enableKeys = false;
       controls.minDistance = 15;
-      controls.maxDistance = 1500;
+      controls.maxDistance = 2000;
       controls.maxPolarAngle = Math.PI / 2;
       controls.autoRotateSpeed = -2;
 
 
       ctx = new AudioContext();
-      var mediaElement = document.getElementById('audio');
+      mediaElement = document.getElementById('audio');
       mediaElement.play();
       // var mediaElement = new Audio();
       // mediaElement.crossOrigin = "anonymous";
@@ -53,10 +56,10 @@ const AnalyserThree = () => {
 
       audioSrc.connect(analyser);
       analyser.connect(ctx.destination);
-      analyser.fftSize = 2 ** 9;
+      analyser.fftSize = 2 ** 12;
 
       frequencyData = new Uint8Array(analyser.frequencyBinCount);
-      bufferLength = analyser.frequencyBinCount;
+      bufferLength = analyser.frequencyBinCount / 8;
       dataArray = new Uint8Array(bufferLength);
       
       material = new THREE.MeshBasicMaterial( { color: 0xf4f7dc } );
@@ -69,7 +72,7 @@ const AnalyserThree = () => {
 
       function addGround(){
         var groundMat = new THREE.MeshLambertMaterial( {color: 0xffffff, side: THREE.DoubleSide}  );
-        geometry = new THREE.PlaneGeometry(1000,1000,bufferLength-1,100);
+        geometry = new THREE.PlaneGeometry(2000,1000,bufferLength-1,100);
         length = geometry.vertices.length;
         
         geometry.computeFaceNormals();
@@ -83,8 +86,8 @@ const AnalyserThree = () => {
         });
         geometry.colorsNeedUpdate = true;
         ground.rotation.x = -Math.PI/2;
-        ground.position.x = 200;
-        ground.position.y = -128;
+        // ground.position.x = 200;
+        ground.position.y = -256;
 
         scene.add(ground);
       }
@@ -113,14 +116,14 @@ const AnalyserThree = () => {
       for (let i = length-1; i >= bufferLength; i--)
         geometry.vertices[i].z = geometry.vertices[i-bufferLength].z;
       for (let i = 0; i < bufferLength; i++)
-        geometry.vertices[i].z = (dataArray[i]);
+        geometry.vertices[i].z = (dataArray[i] * 2);
       geometry.verticesNeedUpdate = true;
 
       geometry.faces.forEach(function(face){
-        var val = 0.8 - (geometry.vertices[face.a].z / 256);
+        var val = 1.2 - (geometry.vertices[face.a].z / 400);
         // face.color.setHSL(val, 1.0, 0.5)
-        // face.color.setHSL(val, 1.0, val < .8 ? 0.5 - val/4 : 0)
-        face.color.setHSL(val, 1.0, val < .8 ? 0.4 : 0)
+        face.color.setHSL(val, 1.0, val < .8 ? 0.4 - val/2 : 0)
+        // face.color.setHSL(val, 1.0, val < .8 ? 0.4 : 0)
       });
       geometry.colorsNeedUpdate = true;
       /*
@@ -157,41 +160,28 @@ const AnalyserThree = () => {
       <div id="container">
         <Visualizer id='canvas'/>
       </div>
-      <ControlPanel>
-        <table>
-          <tbody>
-            <tr>
-              <td>
-                Data Type<br/>
-                Frequency
-                <input onChange={() => {frequency = true; ground.position.x = 200;}} type="radio" name="myRadios" value="1" defaultChecked/><br/>
-                Time
-                <input onChange={() => {frequency = false; ground.position.x = 0;}} type="radio" name="myRadios" value="2" />
-              </td>
-            </tr>
-            <tr>
-              <td>
-                Camera Positions<br/>
-                <button onClick={() => {camera.position.set( 0, 0, 1000 );} }>1</button>
-                <button onClick={() => {camera.position.set( 0, 0, -1000 );} }>2</button>
-                <button onClick={() => {camera.position.set( 0, 1000, 0 );} }>3</button>
-                <button onClick={() => {camera.position.set( 1000, 0, 0 );} }>4</button>
-                <button onClick={() => {camera.position.set( 600, 800, 600 );} }>5</button>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                Auto Rotate<br/>
-                <input onChange={(e) => {controls.autoRotate = e.target.checked;}} type="checkbox" name="rotate" value="1"/>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </ControlPanel>
+      <CameraControls 
+        setCamera={(p1,p2,p3) => {camera.position.set(p1,p2,p3)}}
+      />
       {/* <div id="info">
         <a href="https://threejs.org" target="_blank" rel="noopener noreferrer">three.js</a> webaudio - visualizer<br/>
         music by <a href="http://www.newgrounds.com/audio/listen/376737" target="_blank" rel="noopener">skullbeatz</a>
       </div> */}
+      <input type="file"
+      style={{position: "absolute", zIndex: "998"}}
+      onChange={(event)=> {
+        var sound = document.getElementById('audio');
+        sound.src = URL.createObjectURL(event.target.files[0]);
+        sound.play();
+        // not really needed in this exact case, but since it is really important in other cases,
+        // don't forget to revoke the blobURI when you don't need it
+        sound.onend = function(e) {
+          URL.revokeObjectURL(event.target.src);
+        }
+      }}
+       id="avatar" name="avatar"
+      //  accept="image/png, image/jpeg"
+       ></input>
     </div>
   );
 }
