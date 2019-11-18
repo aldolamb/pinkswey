@@ -50,10 +50,10 @@ const AnalyserThree = () => {
 
       audioSrc.connect(analyser);
       analyser.connect(ctx.destination);
-      analyser.fftSize = 2 ** 7;
+      analyser.fftSize = 2 ** 10;
 
       frequencyData = new Uint8Array(analyser.frequencyBinCount);
-      bufferLength = analyser.frequencyBinCount;
+      bufferLength = analyser.frequencyBinCount / 8;
       dataArray = new Uint8Array(bufferLength);
       
       material = new THREE.MeshBasicMaterial( { color: 0xf4f7dc } );
