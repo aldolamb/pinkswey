@@ -17,14 +17,26 @@ export const Time = styled.span`
   width: ${rem(43)};
 `;
 
+
+export const TimeBlock = styled.div`
+  position: absolute;
+  right: ${rem(50)};
+  bottom: ${rem(50)};
+  div {
+    color: #f4f7dc;
+    font-size: ${rem(16)};
+  }
+`;
+
 export const Progress = styled.div`
   flex: 1;
   border-radius: ${rem(5)};
-  margin: 0 ${rem(20)};
+  // margin: 0 ${rem(20)};
   height: ${rem(3)};
   display: flex;
   align-items: center;
   cursor: pointer;
+  transition-duration: .2s;
 `;
 
 export const ProgressKnob = styled.span`

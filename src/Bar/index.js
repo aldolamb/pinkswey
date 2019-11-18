@@ -21,15 +21,15 @@ export default function Bar(props) {
 
   return (
     <PlayerStyled className="player">
-        <GraveyardShift/>
+        {/* <GraveyardShift/> */}
         <Controls>
-          <PlayPause
+          {/* <PlayPause
             playing={playing}
             setPlaying={setPlaying}
-          />
+          /> */}
           <Progress curTime={curTime} duration={duration} onTimeUpdate={(time) => setClickedTime(time)}/>
         </Controls>
-        <PinkSwey/>
+        {/* <PinkSwey/> */}
       </PlayerStyled>
   );
 }

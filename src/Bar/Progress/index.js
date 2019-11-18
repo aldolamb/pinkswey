@@ -6,8 +6,10 @@ import {
   Progress,
   ProgressKnob,
   Time,
+  TimeBlock,
 } from './styled';
 import { padding } from "polished";
+import GraveyardShift from '../../assets/GraveyardShift';
 // import moment from "moment";
 // import momentDurationFormatSetup from "moment-duration-format";
 
@@ -53,20 +55,27 @@ export default function ProgressBar(props) {
 
   return (
     <BarStyled>
-      <Time>{formatDuration(curTime)}</Time>
+      {/* <Time>{formatDuration(curTime)}</Time> */}
       <Progress
         id="bar__progress"
         style={{
           // background: `linear-gradient(to right, #46f737 ${curPercentage/4}%, #e9ff15 ${curPercentage/2}%, #ff551a ${curPercentage * 3 / 4}%, #ff1d53 ${curPercentage}%, white 0)`
-          background: `linear-gradient(to right, #ff1d53 0%, #ff551a ${curPercentage / 2}%, #e9ff15 ${curPercentage}%, white 0)`
+          // background: `linear-gradient(to right, #ff1d53 0%, #ff551a ${curPercentage / 2}%, #e9ff15 ${curPercentage}%, white 0)`
+          background: `linear-gradient(to right, #e9ff15 0%, #ff551a ${curPercentage / 2}%, #ff1d53 ${curPercentage}%, white 0)`
+          // background: `linear-gradient(to right, #ff1d53 ${curPercentage}%, #f4f7dc 0)`,
         }}
         onMouseDown={e => handleTimeDrag(e)}
       >
-        <ProgressKnob
+        {/* <ProgressKnob
           style={{ left: `${curPercentage - 1}%` }}
-        />
+        /> */}
       </Progress>
-      <Time>{formatDuration(duration)}</Time>
+      
+      <TimeBlock>
+        <GraveyardShift/>
+        <div>{formatDuration(curTime)} - {formatDuration(duration)}</div>
+      </TimeBlock>
+      {/* <Time>{formatDuration(duration)}</Time> */}
       {/* <input style={{margin: '0 20px', width: '100px'}} type="range" min="0" max="100" step='10' id="latency"/> */}
     </BarStyled>
   );
