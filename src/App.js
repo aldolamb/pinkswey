@@ -1,5 +1,5 @@
 import React, {useRef, useEffect, useState} from 'react';
-import Analyser from './AnalyserSphere';
+import Analyser from './Analyser';
 import Bar from './Bar';
 import Audio from './Audio';
 import GraveyardShift from './assets/GraveyardShift';
