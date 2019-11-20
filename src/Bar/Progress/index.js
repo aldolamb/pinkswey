@@ -10,6 +10,7 @@ import {
 } from './styled';
 import { padding } from "polished";
 import GraveyardShift from '../../assets/GraveyardShift';
+import PlayPause from "../PlayPause";
 // import moment from "moment";
 // import momentDurationFormatSetup from "moment-duration-format";
 
@@ -25,7 +26,7 @@ export function formatDuration(duration) {
 }
 
 export default function ProgressBar(props) {
-  const { duration, curTime, onTimeUpdate } = props;
+  const { duration, curTime, onTimeUpdate, playing, setPlaying } = props;
 
   const curPercentage = (curTime / duration) * 100;
 
@@ -74,6 +75,10 @@ export default function ProgressBar(props) {
       <TimeBlock>
         <GraveyardShift/>
         <div>{formatDuration(curTime)} - {formatDuration(duration)}</div>
+        <PlayPause
+          playing={playing}
+          setPlaying={setPlaying}
+        />
       </TimeBlock>
       {/* <Time>{formatDuration(duration)}</Time> */}
       {/* <input style={{margin: '0 20px', width: '100px'}} type="range" min="0" max="100" step='10' id="latency"/> */}

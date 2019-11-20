@@ -35,12 +35,12 @@ const AnalyserThree = () => {
       scene = new THREE.Scene();
       camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 2500 );
       // 
-      camera.position.set( 0, 0, 100 );
+      camera.position.set( 0, 0, 150 );
       camera.lookAt( 0, 0, 0 );
 
       controls = new OrbitControls( camera, renderer.domElement );
       controls.enableKeys = false;
-      controls.minDistance = 15;
+      controls.minDistance = 1;
       controls.maxDistance = 2000;
       // controls.maxPolarAngle = Math.PI / 2;
       controls.autoRotateSpeed = -2;
@@ -80,6 +80,9 @@ const AnalyserThree = () => {
     }
 
     function onResize() {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+
       renderer.setSize( window.innerWidth, window.innerHeight );
     }
 

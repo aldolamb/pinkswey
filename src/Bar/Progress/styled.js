@@ -25,6 +25,7 @@ export const TimeBlock = styled.div`
   div {
     color: #f4f7dc;
     font-size: ${rem(16)};
+    margin: auto;
   }
 `;
 
