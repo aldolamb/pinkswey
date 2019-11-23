@@ -43,7 +43,7 @@ const AnalyserThree = () => {
       controls.minDistance = 1;
       controls.maxDistance = 2000;
       // controls.maxPolarAngle = Math.PI / 2;
-      controls.autoRotateSpeed = -2;
+      // controls.autoRotateSpeed = -2;
 
       ctx = new AudioContext();
       mediaElement = document.getElementById('audio');
