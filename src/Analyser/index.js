@@ -73,7 +73,7 @@ const AnalyserThree = () => {
       addLight();
 
       // addLandscape(scene, bufferLength);
-      addLine(scene, bufferLength);
+      // addLine(scene, bufferLength);
       // addLines(scene, bufferLength);
       // addParticles(scene);
       addSphere(scene);
@@ -99,7 +99,7 @@ const AnalyserThree = () => {
       analyser.getByteTimeDomainData(timeDomainData);
 
       // updateLandscape(frequencyData);   
-      updateLine(timeDomainData);   
+      // updateLine(timeDomainData);   
       // updateLines(timeDomainData);  
       // updateParticles(frequencyData, bufferLength);   
       updateSphere(frequencyData);

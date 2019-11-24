@@ -6,10 +6,10 @@ const CameraControls = ({
 }) => {
   return (
     <CameraPresets>
-      <button onClick={() => setCamera( 0, 600, 0 )}>1</button>
-      <button onClick={() => setCamera( 0, 0, -750 )}>2</button>
-      <button onClick={() => setCamera( 750, 0, 0 )}>3</button>
-      <button onClick={() => setCamera( 400, 500, 400 )}>4</button>
+      <button onClick={() => setCamera( 0, 600 / 4, 0 )}>1</button>
+      <button onClick={() => setCamera( 0, 0, -750 / 4 )}>2</button>
+      <button onClick={() => setCamera( 750 / 4, 0, 0 )}>3</button>
+      <button onClick={() => setCamera( 400 / 4, 500 / 4, 400 / 4 )}>4</button>
     </CameraPresets>
   );
 }
