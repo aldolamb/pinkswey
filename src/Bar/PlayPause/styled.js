@@ -5,8 +5,8 @@ import {
 } from 'polished';
 
 export const Button = styled.div`
-    width: ${rem(20)};
-    height: ${rem(18)};
+    width: ${rem(40)};
+    height: ${rem(36)};
     background-color: transparent;
     border: none;
     cursor: pointer;

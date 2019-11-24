@@ -11,6 +11,9 @@ import { addLines, updateLines } from './Visualizers/lines';
 import { addParticles, updateParticles } from './Visualizers/particles';
 import { addSphere, updateSphere } from './Visualizers/sphere';
 
+import Lottie from 'react-lottie';
+import animationData from '../assets/icons/GraveyardLoading.json';
+
 const AnalyserThree = () => {
   window.AudioContext = window.AudioContext || window.webkitAudioContext || window.mozAudioContext;
   var scene, camera, renderer, analyser, uniforms, controls;
@@ -54,8 +57,8 @@ const AnalyserThree = () => {
 
       audioSrc.connect(analyser);
       analyser.connect(ctx.destination);
-      analyser.fftSize = 512;
-      // analyser.fftSize = 2 ** 10;
+      // analyser.fftSize = 512;
+      analyser.fftSize = 2 ** 10;
 
       bufferLength = analyser.frequencyBinCount;
       // bufferLength = analyser.frequencyBinCount / 8;
@@ -106,12 +109,26 @@ const AnalyserThree = () => {
     }
   }, []);
 
+  const defaultOptions = {
+    loop: true,
+    autoplay: true, 
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice'
+    }
+  };
+
   return (
     <div>
       <Overlay id="overlay">
         <div>
-          <button id="startButton">Click to Play</button>
-          <p>Audio playback requires user interaction.</p>
+          <button id="startButton">
+            <Lottie options={defaultOptions}
+              height={100}
+              width={400}/>
+          </button>
+          {/* <button id="startButton">Click to Play</button> */}
+          {/* <p>Audio playback requires user interaction.</p> */}
         </div>
       </Overlay>
       <div id="container">

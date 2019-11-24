@@ -29,6 +29,17 @@ export const TimeBlock = styled.div`
   }
 `;
 
+export const Left = styled.div`
+  position: absolute;
+  Left: ${rem(50)};
+  bottom: ${rem(50)};
+  div {
+    color: #f4f7dc;
+    font-size: ${rem(16)};
+    margin: auto;
+  }
+`;
+
 export const Progress = styled.div`
   flex: 1;
   border-radius: ${rem(5)};
