@@ -25,6 +25,18 @@ export const TimeBlock = styled.div`
   div {
     color: #f4f7dc;
     font-size: ${rem(16)};
+    margin: auto;
+  }
+`;
+
+export const Left = styled.div`
+  position: absolute;
+  Left: ${rem(50)};
+  bottom: ${rem(50)};
+  div {
+    color: #f4f7dc;
+    font-size: ${rem(16)};
+    margin: auto;
   }
 `;
 

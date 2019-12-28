@@ -1,6 +1,6 @@
 import React from "react";
-import Play from "../../assets/icons/Play";
-import Pause from "../../assets/icons/Pause";
+import Play from "../../assets/icons/PlayCircle";
+import Pause from "../../assets/icons/PauseCircle";
 import {
   Button
 } from './styled';

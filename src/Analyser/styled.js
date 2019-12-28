@@ -28,14 +28,17 @@ export const Overlay = styled.div`
   opacity: 1;
   background-color: #000000;
   color: #ffffff;
+  * {
+    fill: #f4f7dc;
+  }
   > div {
     text-align: center;
     > button {
-      height: 20px;
-      width: 100px;
+      // height: 20px;
+      // width: 100px;
       background: transparent;
       color: #ffffff;
-      outline: 1px solid #ffffff;
+      // outline: 1px solid #ffffff;
       border: 0px;
       cursor: pointer;
     }

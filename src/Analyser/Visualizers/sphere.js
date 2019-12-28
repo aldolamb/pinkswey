@@ -19,9 +19,9 @@ export function addSphere(scene) {
 }
 
 export function updateSphere(dataArray) {
-  var lowerHalfArray = dataArray.slice(0, (dataArray.length/4) - 1);
+  var lowerHalfArray = dataArray.slice(0, (dataArray.length/8) - 1);
   var upperHalfArray = 
-  dataArray.slice((dataArray.length/4) - 1, dataArray.length - 1);
+  dataArray.slice((dataArray.length/8) - 1, dataArray.length - 1);
   // do some basic reductions/normalisations
   var lowerMax = max(lowerHalfArray);
   var lowerAvg = avg(lowerHalfArray);
@@ -41,8 +41,8 @@ export function updateSphere(dataArray) {
 
 function makeRoughBall(mesh, bassFr, treFr) { 
   mesh.geometry.vertices.forEach(function (vertex, i) {
-    var offset = mesh.geometry.parameters.radius;
-    var amp = 14;
+    var offset = mesh.geometry.parameters.radius * 8;
+    var amp = 20; // 14
     var time = window.performance.now(); 
     vertex.normalize();
     var distance = (offset + bassFr) + noise.noise3D(

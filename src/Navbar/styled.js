@@ -16,11 +16,13 @@ export const Top = styled.ul`
 
   li {
     display: inline; 
-    a {
-      padding: 0 ${rem(30)}; 
+    a, img {
+      padding: 0 ${rem(26)}; 
       cursor: pointer;
       color: inherit;
       text-decoration: inherit;
+      fill: #f4f7dc;
+      height: ${rem(9)};
     }
   }
 `;
@@ -32,10 +34,10 @@ export const Right = styled.ul`
   padding: 0;
   top: 50vh;
   color: #f4f7dc;
-  right: ${rem(-130)};
+  right: ${rem(-112)};
   width: ${rem(300)};
   transform: rotate(-90deg);
-  transform-origin: 50% 100%;
+  transform-origin: 50% 0;
 
   li {
     display: inline; 

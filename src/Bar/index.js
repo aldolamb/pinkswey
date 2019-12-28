@@ -27,7 +27,13 @@ export default function Bar(props) {
             playing={playing}
             setPlaying={setPlaying}
           /> */}
-          <Progress curTime={curTime} duration={duration} onTimeUpdate={(time) => setClickedTime(time)}/>
+          <Progress 
+            curTime={curTime} 
+            duration={duration} 
+            onTimeUpdate={(time) => setClickedTime(time)}
+            playing={playing}
+            setPlaying={setPlaying}
+            />
         </Controls>
         {/* <PinkSwey/> */}
       </PlayerStyled>

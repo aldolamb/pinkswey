@@ -20,6 +20,8 @@
 .idea/
 
 /assets
+/src/assets
+/src/config
 .firebase
 
 npm-debug.log*

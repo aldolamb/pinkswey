@@ -11,6 +11,9 @@ import { addLines, updateLines } from './Visualizers/lines';
 import { addParticles, updateParticles } from './Visualizers/particles';
 import { addSphere, updateSphere } from './Visualizers/sphere';
 
+import Lottie from 'react-lottie';
+import animationData from '../assets/icons/GraveyardLoading.json';
+
 const AnalyserThree = () => {
   window.AudioContext = window.AudioContext || window.webkitAudioContext || window.mozAudioContext;
   var scene, camera, renderer, analyser, uniforms, controls;
@@ -33,17 +36,17 @@ const AnalyserThree = () => {
       renderer.setClearColor( 0x000000 );
       renderer.setPixelRatio( window.devicePixelRatio );
       scene = new THREE.Scene();
-      camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 2500 );
+      camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 3000 );
       // 
-      camera.position.set( 0, 0, 100 );
+      camera.position.set( 0, 0, 150 );
       camera.lookAt( 0, 0, 0 );
 
       controls = new OrbitControls( camera, renderer.domElement );
       controls.enableKeys = false;
-      controls.minDistance = 15;
+      controls.minDistance = 1;
       controls.maxDistance = 2000;
       // controls.maxPolarAngle = Math.PI / 2;
-      controls.autoRotateSpeed = -2;
+      // controls.autoRotateSpeed = -2;
 
       ctx = new AudioContext();
       mediaElement = document.getElementById('audio');
@@ -54,11 +57,11 @@ const AnalyserThree = () => {
 
       audioSrc.connect(analyser);
       analyser.connect(ctx.destination);
-      analyser.fftSize = 512;
-      // analyser.fftSize = 2 ** 10;
+      // analyser.fftSize = 512;
+      analyser.fftSize = 2 ** 12;
 
-      bufferLength = analyser.frequencyBinCount;
-      // bufferLength = analyser.frequencyBinCount / 8;
+      // bufferLength = analyser.frequencyBinCount;
+      bufferLength = analyser.frequencyBinCount / 8;
       frequencyData = new Uint8Array(bufferLength);
       timeDomainData = new Uint8Array(bufferLength);
 
@@ -70,7 +73,7 @@ const AnalyserThree = () => {
       addLight();
 
       // addLandscape(scene, bufferLength);
-      addLine(scene, bufferLength);
+      // addLine(scene, bufferLength);
       // addLines(scene, bufferLength);
       // addParticles(scene);
       addSphere(scene);
@@ -80,6 +83,9 @@ const AnalyserThree = () => {
     }
 
     function onResize() {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+
       renderer.setSize( window.innerWidth, window.innerHeight );
     }
 
@@ -93,8 +99,8 @@ const AnalyserThree = () => {
       analyser.getByteTimeDomainData(timeDomainData);
 
       // updateLandscape(frequencyData);   
-      updateLine(timeDomainData);   
-      // updateLines(timeDomainData);  
+      // updateLine(timeDomainData);   
+      // updateLines(frequencyData);  
       // updateParticles(frequencyData, bufferLength);   
       updateSphere(frequencyData);
 
@@ -103,12 +109,26 @@ const AnalyserThree = () => {
     }
   }, []);
 
+  const defaultOptions = {
+    loop: true,
+    autoplay: true, 
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice'
+    }
+  };
+
   return (
     <div>
       <Overlay id="overlay">
         <div>
-          <button id="startButton">Click to Play</button>
-          <p>Audio playback requires user interaction.</p>
+          <button id="startButton">
+            <Lottie options={defaultOptions}
+              height={100}
+              width={400}/>
+          </button>
+          {/* <button id="startButton">Click to Play</button> */}
+          {/* <p>Audio playback requires user interaction.</p> */}
         </div>
       </Overlay>
       <div id="container">

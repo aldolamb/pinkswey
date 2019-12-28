@@ -5,7 +5,7 @@ let geometry, bufferLength, ground, length;
 export function addLandscape(scene, bl){
   bufferLength = bl;
   var groundMat = new THREE.MeshLambertMaterial( {color: 0xffffff, side: THREE.DoubleSide}  );
-  geometry = new THREE.PlaneGeometry(2000,1000,bufferLength-1,100);
+  geometry = new THREE.PlaneGeometry(1000,1000,bufferLength-1,100);
   length = geometry.vertices.length;
   
   geometry.computeFaceNormals();
