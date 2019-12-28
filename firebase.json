@@ -4,7 +4,6 @@
     "ignore": [
       "firebase.json",
       "**/.*",
-      "**/src/**",
       "**/node_modules/**"
     ],
     "rewrites": [
@@ -13,5 +12,8 @@
         "destination": "/index.html"
       }
     ]
+  },
+  "storage": {
+    "rules": "storage.rules"
   }
 }

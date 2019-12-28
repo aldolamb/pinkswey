@@ -36,7 +36,7 @@ const AnalyserThree = () => {
       renderer.setClearColor( 0x000000 );
       renderer.setPixelRatio( window.devicePixelRatio );
       scene = new THREE.Scene();
-      camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 2500 );
+      camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 3000 );
       // 
       camera.position.set( 0, 0, 150 );
       camera.lookAt( 0, 0, 0 );
@@ -58,10 +58,10 @@ const AnalyserThree = () => {
       audioSrc.connect(analyser);
       analyser.connect(ctx.destination);
       // analyser.fftSize = 512;
-      analyser.fftSize = 2 ** 10;
+      analyser.fftSize = 2 ** 12;
 
-      bufferLength = analyser.frequencyBinCount;
-      // bufferLength = analyser.frequencyBinCount / 8;
+      // bufferLength = analyser.frequencyBinCount;
+      bufferLength = analyser.frequencyBinCount / 8;
       frequencyData = new Uint8Array(bufferLength);
       timeDomainData = new Uint8Array(bufferLength);
 
@@ -100,7 +100,7 @@ const AnalyserThree = () => {
 
       // updateLandscape(frequencyData);   
       // updateLine(timeDomainData);   
-      // updateLines(timeDomainData);  
+      // updateLines(frequencyData);  
       // updateParticles(frequencyData, bufferLength);   
       updateSphere(frequencyData);
 

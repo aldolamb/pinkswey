@@ -41,8 +41,8 @@ export function updateSphere(dataArray) {
 
 function makeRoughBall(mesh, bassFr, treFr) { 
   mesh.geometry.vertices.forEach(function (vertex, i) {
-    var offset = mesh.geometry.parameters.radius;
-    var amp = 14;
+    var offset = mesh.geometry.parameters.radius * 8;
+    var amp = 20; // 14
     var time = window.performance.now(); 
     vertex.normalize();
     var distance = (offset + bassFr) + noise.noise3D(
